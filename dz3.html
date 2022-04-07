@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <title>index</title>
+</head>
+<body>
+<script>
+let a = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
+let i = 0;
+while (i < a.length) {
+  console.log(a[i++]);
+}
+
+
+let goods = [200, 350, 700, 1763];
+let totalPrice = 0;
+function countBusketPrice (goods, totalPrice){
+    for (let i = 0; i < goods.length; i++) {
+        totalPrice = totalPrice + goods[i];
+    }
+    console.log (totalPrice);
+}
+countBusketPrice (goods, totalPrice);
+</script>
+    
+</body>
+</html>
