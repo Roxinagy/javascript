@@ -7,125 +7,127 @@
 </head>
 <body>
 <script>
-//    let a = -4, b = -5;
-//    if (a>=0 && b>=0) {
-//         alert (Math.abs(a-b));
-//    }
-//    else if (a<0 && b<0) {
-//        alert (a*b);
-//    }
-//    else {
-//        alert (a+b);
-//    }
+   let a = -4, b = -5;
+   if (a>=0 && b>=0) {
+        alert (Math.abs(a-b));
+   }
+   else if (a<0 && b<0) {
+       alert (a*b);
+   }
+   else {
+       alert (a+b);
+   }
 
 
 
-//    let c = 7;
-//    switch (c) {
-//        case 2:
-//        alert ('2 3 4 5 6 7 8 9 10 11 12 13 14 15');
-//        break;
+   let c = 7;
+   switch (c) {
+       case 2:
+       alert ('2 3 4 5 6 7 8 9 10 11 12 13 14 15');
+       break;
 
-//        case 3:
-//        alert ('3 4 5 6 7 8 9 10 11 12 13 14 15');
-//        break;
+       case 3:
+       alert ('3 4 5 6 7 8 9 10 11 12 13 14 15');
+       break;
 
-//        case 4:
-//        alert ('4 5 6 7 8 9 10 11 12 13 14 15');
-//        break;
+       case 4:
+       alert ('4 5 6 7 8 9 10 11 12 13 14 15');
+       break;
 
-//        case 5:
-//        alert ('5 6 7 8 9 10 11 12 13 14 15');
-//        break;
+       case 5:
+       alert ('5 6 7 8 9 10 11 12 13 14 15');
+       break;
 
-//        case 6:
-//        alert ('6 7 8 9 10 11 12 13 14 15');
-//        break;
+       case 6:
+       alert ('6 7 8 9 10 11 12 13 14 15');
+       break;
 
-//        case 7:
-//        alert ('7 8 9 10 11 12 13 14 15');
-//        break;
+       case 7:
+       alert ('7 8 9 10 11 12 13 14 15');
+       break;
 
-//        case 8:
-//        alert ('8 9 10 11 12 13 14 15');
-//        break;
+       case 8:
+       alert ('8 9 10 11 12 13 14 15');
+       break;
 
-//        case 9:
-//        alert ('9 10 11 12 13 14 15');
-//        break;
+       case 9:
+       alert ('9 10 11 12 13 14 15');
+       break;
 
-//        case 10:
-//        alert ('10 11 12 13 14 15');
-//        break;
+       case 10:
+       alert ('10 11 12 13 14 15');
+       break;
 
-//        case 11:
-//        alert ('11 12 13 14 15');
-//        break;
+       case 11:
+       alert ('11 12 13 14 15');
+       break;
 
-//        case 12:
-//        alert ('12 13 14 15');
-//        break;
+       case 12:
+       alert ('12 13 14 15');
+       break;
 
-//        case 13:
-//        alert ('13 14 15');
-//        break;
+       case 13:
+       alert ('13 14 15');
+       break;
 
-//        case 14:
-//        alert ('14 15');
-//        break;
+       case 14:
+       alert ('14 15');
+       break;
 
-//        case 15:
-//        alert ('15');
-//        break;
-//    }
-let a = prompt("Введите первое число");
-let b = prompt("Введите второе число");
+       case 15:
+       alert ('15');
+       break;
+   }
+
+let d = prompt("Введите первое число");
+let e = prompt("Введите второе число");
 let x;
 
-   function addition (a, b) {
-       x = a+b;
+   function addition (d, e) {
+       x = d+e;
        return x;
    }
-   function subtraction (a, b) {
-       x = a-b;
+   function subtraction (d, e) {
+       x = d-e;
        return x;
    }
-   function multiplication (a, b) {
-       x = a*b;
+   function multiplication (d, e) {
+       x = d*e;
        return x;
    }
-   function division (a, b) {
-       x = a/b;
+   function division (d, e) {
+       x = d/e;
        return x;
    }
  
   let operation;
-   function mathOperation(a, b, operation) {
+   function mathOperation(d, e, operation) {
       
-       operation = prompt('Что сделать с числами? ( + - * /');
+       operation = prompt('Что сделать с числами? ( + - * /)');
        switch (operation) {
            case '+':
-            addition (a,b);
+            addition (d,e);
             alert (x);
             break;
 
             case '-':
-            subtraction (a,b);
+            subtraction (d,e);
             alert (x);
             break;
 
             case '*':
-            multiplication (a,b);
+            multiplication (d,e);
             alert (x);
             break;
 
             case '/':
-            division (a,b);
+            division (d,e);
             alert (x);
             break;
        }
+       return addition (d,e);
    }
-   mathOperation (a,b,operation);
+   mathOperation (d,e,operation);
 </script>
     
 </body>

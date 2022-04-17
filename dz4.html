@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <title>index</title>
+</head>
+<body>
+<script>
+let object = {};
+const Div = (num) => {
+    const keys = 'ones dozens hundreds'.split(' ');
+    let src = (num + '')||'0';
+    let div = src.split('');
+    for (let i = keys.length, ln = div.length; i--; ) {
+        object[keys[i]] = (+div[ln - 1 - i])||0;
+    };
+};
+Div(789);
+console.log(object);
+
+let goods2 = [{
+     price: 100,
+     name: 'product1'
+},
+{
+     price: 1000,
+     name: 'product2'
+},
+{
+     price: 500,
+     name: 'product3'
+},
+{
+     price: 1587,
+     name: 'product4'
+}]
+let totalPrice = 0;
+const countBusketPrice = (goods) => {
+    let totalPrice = goods.reduce ((n,i)=>n+i.price,0);
+    console.log ('Total Price: '+totalPrice);
+}
+countBusketPrice (goods2);
+</script>
+    
+</body>
+</html>
