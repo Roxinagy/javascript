@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <title>index</title>
+</head>
+<body>
+    <div class="cart"></div>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-spacing: 0;
+  border: 0;
+  margin: 20px 20px;
+}
+
+tr:not(:last-child) td:not(:first-child) {
+  border: 1px solid black;
+}
+
+.black {
+  width: 40px;
+  height: 40px;
+  background: black;
+}
+
+.white {
+  width: 40px;
+  height: 40px;
+  background: white;
+}
+
+.letter {
+  text-align: center;
+}
+</style>
+
+<script>
+
+let table = document.createElement("table");
+let letters = "ABCDEFGH";
+for (let i = 0; i < 9; i++) {
+  let tr = document.createElement('tr');
+  for (let j = 0; j < 9; j++) {
+    let td = document.createElement('td');
+    if (j === 0) {
+      td.textContent = 8-i || '';
+      tr.appendChild(td);
+      continue;
+    }
+    if (i === 8) {
+      td.textContent = letters.charAt(j-1);
+      td.classList.add('letter');
+      tr.appendChild(td);
+      continue;
+    }
+    if (i % 2 == j % 2) {
+      td.className = "white";
+    } else {
+      td.className = "black";
+    }
+    tr.appendChild(td);
+  }
+  table.appendChild(tr);
+}
+document.body.appendChild(table);
+
+let goods = [{
+     price: 100,
+     name: 'product1'
+},
+{
+     price: 1000,
+     name: 'product2'
+},
+{
+     price: 500,
+     name: 'product3'
+},
+{
+     price: 1587,
+     name: 'product4'
+}]
+const renderCart = list => {
+    const div = document.querySelector('.cart');
+    let totalPrice = list.reduce ((n,i)=>n+i.price,0);
+    div.innerHTML = list.length ? `В корзине: ${list.length+1} товаров на сумму ${totalPrice} рублей` : 'Корзина пуста';
+}
+renderCart(goods);
+</script>
+    
+</body>
+</html>
