@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>index</title>
+</head>
+<body>
+<div class="headline">
+  <div class="container details-menu">
+    <details class="details" id="details1" open>
+      <summary id="summCart">Состав корзины</summary>
+      <div class="cart">Корзина пуста</div>
+      <div id='sum'></div>
+      <div id="templateBasket" style="display:none;">
+        <div id='templateBasketMenu'>
+          <div>Наименование</div>
+          <div>Цена</div>
+          <div>Кол-во</div>
+          <div>Сумма</div>
+        </div>
+        <div>
+          <span class="productName"></span> (<span class="price"></span>) x
+          <span class="quantity"></span> [<span class="sum"></span>]
+          <button onclick="return deleteProduct(event)">x</button>
+        </div>
+      </div>
+      <div id="basket" class="basket"></div>
+      <div class="flex-button">
+        <button class="clear-button" id="clearBasket">Очистить корзину</button>
+        <button class="button" id="next">Далее</button>
+      </div>
+    </details>
+    <details class="details" id="details2">
+      <summary id="summAddress">Адрес доставки</summary>
+      <div>
+        <span>Страна</span>
+        <label>
+          <input type="text">
+        </label>
+      </div>
+      <div>
+        <span>Город</span>
+        <label>
+          <input type="text">
+        </label>
+      </div>
+      <div>
+        <span>Улица</span>
+        <label>
+          <input type="text">
+        </label>
+      </div>
+      <div>
+        <span>Дом</span>
+        <label>
+          <input type="text">
+        </label>
+      </div>
+      <div>
+        <span>Квартира</span>
+        <label>
+          <input type="text">
+        </label>
+      </div>
+      <div>
+        <span>Индекс</span>
+        <label>
+          <input type="text">
+        </label>
+      </div>
+      <div class="flex-button">
+        <button class="button" id="next">Далее</button>
+      </div>
+    </details>
+    <details class="details" id="details3">
+      <summary id="summComment">Комментарий</summary>
+      <div>Товар получили, качество отличное!</div>
+      <div>Большое спасибо за быструю доставку</div>
+      <div>Товар получили, качество отличное!</div>
+      <div>Большое спасибо за быструю доставку</div>
+    </details>
+  </div>
+</div>
+<div class="products"></div>
+<script>
+
+  let goods = [
+    {
+      id: 1,
+      price: 100,
+      name: 'product1'
+    },
+    {
+      id: 2,
+      price: 1000,
+      name: 'product2'
+    },
+    {
+      id: 3,
+      price: 500,
+      name: 'product3'
+    },
+    {
+      id: 4,
+      price: 1587,
+      name: 'product4'
+    }
+  ]
+  let cart = [];
+
+  let detailsMenu = document.querySelector('.details-menu');
+  let templateBasket = document.getElementById('templateBasket').children[1];
+  let clearBnt = document.querySelector('.clear-button');
+
+  const deleteProduct = (e) => {
+    const name = e.path[1].querySelector('.productName').innerHTML
+    cart.forEach((item, index) => {
+      if (item.name === name) {
+        if (item.qty !== 1) {
+          item.qty--
+        } else {
+          cart.splice(index, 1);
+        }
+      }
+    })
+    buildCart()
+  }
+
+  const buildCart = () => {
+    const div = document.querySelector('.cart');
+    div.innerHTML = '';
+    if (cart.length > 0) {
+      cart.forEach(item => {
+        let itemBasket = templateBasket.cloneNode(true);
+
+        itemBasket.querySelector('.productName').textContent = item.name;
+        itemBasket.querySelector('.price').textContent = item.price;
+        itemBasket.querySelector('.quantity').textContent = item.qty;
+
+        itemBasket.querySelector('.sum').textContent = item.price * item.qty;
+
+        div.appendChild(itemBasket);
+      })
+    } else {
+      div.innerHTML = 'Корзина пуста';
+    }
+
+    countBasketItogPrice(cart);
+  }
+
+  const renderItems = list => {
+    const div = document.querySelector('.products');
+    div.innerHTML = list.map(i => {
+      return `<div>
+        <h3 id="${i.id}">${i.name}</h3>
+        <p>${i.price}</p>
+        <button id="btn">Add</button>
+      </div>`
+    }).join('');
+    const btn = document.querySelectorAll('#btn');
+    for (let n = 0; n < btn.length; n++) {
+      btn[n].addEventListener('click', (e) => {
+        const itemPrice = e.path[1].querySelector('p').innerHTML
+        const itemName = e.path[1].querySelector('h3').innerHTML
+        const itemId = e.path[1].querySelector('h3').getAttribute('id')
+        if (!cart.find(item => +item.id === +itemId)) {
+          cart.push({ price: itemPrice, name: itemName, id: itemId, qty: 1 })
+        } else {
+          cart.forEach(item => (itemId === item.id) && (item.qty += 1))
+        }
+
+        buildCart(cart);
+      });
+    }
+  }
+
+  renderItems(goods);
+
+  const handleDetailsMenuClick = (event) => {
+    let details = event.target.parentNode.id;
+
+    if (event.target.parentNode.open) {
+      details.removeAttribute(open);
+    }
+
+    if (event.target.tagName === 'SUMMARY') {
+      let elements = document.querySelectorAll('.details');
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].removeAttribute('open');
+      }
+    }
+
+    if (event.target.id === 'next' && event.target.tagName === 'BUTTON') {
+      let elements = document.querySelectorAll('.details');
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].removeAttribute('open');
+      }
+
+      let nextElement = event.target.parentNode.parentNode.nextSibling.nextElementSibling;
+      nextElement.setAttribute('open', true);
+    }
+  }
+
+  const countBasketItogPrice = (list) => {
+    const div = document.querySelector('#sum');
+    let totalQty = list.reduce((n, i) => n + +i.qty, 0);
+    let totalPrice = list.reduce((n, i) => n + +i.price * i.qty, 0);
+
+    div.innerHTML = `В корзине: ${totalQty} товаров на сумму ${totalPrice} рублей`;
+  }
+
+  detailsMenu.addEventListener('click', handleDetailsMenuClick);
+  clearBnt.addEventListener('click', () => {
+    cart.length = 0;
+    buildCart(cart)
+  });
+
+  buildCart();
+</script>
+
+</body>
+</html>
